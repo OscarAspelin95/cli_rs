@@ -1,8 +1,8 @@
 use crate::utils::{Args, FileMeta, Modified, Size};
 use std::time::SystemTime;
 use tabled::{
+    settings::{object::Columns, Color, Style},
     Table,
-    settings::{Color, Style, object::Columns},
 };
 
 fn modified_since(modified_seconds: u64) -> Modified {
@@ -85,10 +85,12 @@ pub fn cli(args: &Args) {
     }
 
     let mut table = Table::new(results);
+
     table
         .with(Style::rounded())
         .modify(Columns::one(0), Color::FG_BRIGHT_CYAN)
         .modify(Columns::one(1), Color::FG_BRIGHT_WHITE)
         .modify(Columns::one(2), Color::FG_RED);
+
     println!("{}", table);
 }
